@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServerApp";
+
+package to_do;
+
+service ToDoGrpcService {
+    rpc GetAllToDo (EmptyRequest) returns (ListToDo);
+    rpc GetById (IdRequest) returns (ToDo);
+    rpc CreateToDo (AddToDo) returns (ToDo);
+    rpc UpdateToDo (ToDo) returns (ToDo);
+    rpc DeleteToDo (IdRequest) returns (BooleanResponse);
+}
+
+message EmptyRequest {}
+
+message IdRequest {
+    int32 id = 1;
+}
+
+message AddToDo {
+    string title = 1;
+    string description = 2;
+}
+
+message ToDo {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message ListToDo {
+    repeated ToDo all_to_dos = 1;
+}
+
+message BooleanResponse {
+    bool boolean = 1;
+}
